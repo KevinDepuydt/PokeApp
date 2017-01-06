@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {Pokemon} from "./pokemon/pokemon";
 
 @Component({
   selector: 'app-root',

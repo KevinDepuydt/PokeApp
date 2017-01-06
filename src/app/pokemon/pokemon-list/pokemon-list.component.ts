@@ -30,14 +30,14 @@ export class PokemonListComponent implements OnInit {
       let pokedexPokemon = this.pokedex.getPokemonFromPokedex(id);
 
       if (pokedexPokemon) {
-        console.log("Get pokemon from local storage");
+        // get pokemon from local storage
         let pokemon = new Pokemon(pokedexPokemon.name, "https://pokeapi.com/api/v1/pokemon/"+pokedexPokemon.id+"/");
         pokemon.setDetails(pokedexPokemon);
 
         this.pokemons.push(pokemon);
         this.safariProgress = (this.pokemons.length * 100) / this.pokemonToLoad;
       } else {
-        console.log("Get pokemon from service");
+        // get pokemon from service
         this.service.getPokemonById(id)
           .subscribe(res => {
             let pokemon = new Pokemon(res.name, "https://pokeapi.com/api/v1/pokemon/"+res.id+"/");

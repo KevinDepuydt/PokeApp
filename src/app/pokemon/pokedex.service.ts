@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import {Pokemon} from "./pokemon";
 
 @Injectable()
 export class PokedexService {
