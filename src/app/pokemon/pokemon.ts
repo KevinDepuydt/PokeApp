@@ -30,30 +30,30 @@ export class Pokemon {
 
   capture() {
     let id = this.id.toString();
-    let pokedex = JSON.parse(localStorage.getItem("pokedex"));
+    let capturedPokemons = JSON.parse(localStorage.getItem("capturedPokemons"));
 
-    if (pokedex.indexOf(id) === -1) {
-      pokedex.push(id);
+    if (capturedPokemons.indexOf(id) === -1) {
+      capturedPokemons.push(id);
     }
 
-    localStorage.setItem("pokedex", JSON.stringify(pokedex));
+    localStorage.setItem("capturedPokemons", JSON.stringify(capturedPokemons));
   }
 
   release() {
     let id = this.id.toString();
-    let pokedex = JSON.parse(localStorage.getItem("pokedex"));
+    let capturedPokemons = JSON.parse(localStorage.getItem("capturedPokemons"));
 
-    if (pokedex.indexOf(id) !== -1) {
-      pokedex.splice(pokedex.indexOf(id), 1);
+    if (capturedPokemons.indexOf(id) !== -1) {
+      capturedPokemons.splice(capturedPokemons.indexOf(id), 1);
     }
 
-    localStorage.setItem("pokedex", JSON.stringify(pokedex));
+    localStorage.setItem("capturedPokemons", JSON.stringify(capturedPokemons));
   }
 
   isCaptured() {
     let id = this.id.toString();
-    let pokedex = JSON.parse(localStorage.getItem("pokedex"));
+    let capturedPokemons = JSON.parse(localStorage.getItem("capturedPokemons"));
 
-    return pokedex.indexOf(id) !== -1;
+    return capturedPokemons.indexOf(id) !== -1;
   }
 }

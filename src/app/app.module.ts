@@ -9,6 +9,7 @@ import { PokemonListComponent } from './pokemon/pokemon-list/pokemon-list.compon
 import { PokemonDetailsComponent } from "./pokemon/pokemon-details/pokemon-details.component";
 import { PokemonService } from "./pokemon/pokemon.service";
 import { PokemonIndexComponent } from './pokemon/pokemon-index/pokemon-index.component';
+import {PokedexService} from "./pokemon/pokedex.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { PokemonIndexComponent } from './pokemon/pokemon-index/pokemon-index.com
     MaterialModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [PokemonService],
+  providers: [PokemonService, PokedexService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

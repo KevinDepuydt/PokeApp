@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Pokemon} from "./pokemon/pokemon";
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,9 @@ export class AppComponent {
   constructor() {
     if (!localStorage.getItem("pokedex")) {
       localStorage.setItem("pokedex", JSON.stringify([]))
+    }
+    if (!localStorage.getItem("capturedPokemons")) {
+      localStorage.setItem("capturedPokemons", JSON.stringify([]))
     }
   }
 }

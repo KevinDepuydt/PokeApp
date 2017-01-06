@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Pokemon} from "../pokemon";
 import {PokemonService} from "../pokemon.service";
+import {PokedexService} from "../pokedex.service";
 
 @Component({
   selector: 'app-pokemon-index',
@@ -11,29 +12,41 @@ export class PokemonIndexComponent implements OnInit {
   public pokemons: Pokemon[];
   public capturedPokemons: number;
 
-  constructor(private service: PokemonService) {
+  constructor(private service: PokemonService, private pokedex: PokedexService) {
     this.pokemons = [];
     this.capturedPokemons = 0;
   }
 
   getCapturedPokemons(){
-    let pokedex = JSON.parse(localStorage.getItem("pokedex"));
-    this.capturedPokemons = pokedex.length;
+    let capturedPkm = JSON.parse(localStorage.getItem("capturedPokemons"));
+    this.capturedPokemons = capturedPkm.length;
 
-    while (pokedex.length > 0) {
-      let id = pokedex.pop();
-      this.service.getPokemonById(id)
-        .subscribe(res => {
-          let pokemon = new Pokemon(res.name, "https://pokeapi.com/api/v1/pokemon/"+res.id+"/");
-          pokemon.setDetails(res);
+    while (capturedPkm.length > 0) {
+      let id = capturedPkm.pop();
+      let pokedexPokemon = this.pokedex.getPokemonFromPokedex(id);
 
-          this.pokemons.push(pokemon);
-        }, error => {
-          console.log(error);
-          if (error.status !== 404) {
-            pokedex.push(id);
-          }
-        });
+      if (pokedexPokemon) {
+        console.log("Get pokemon from local storage");
+        let pokemon = new Pokemon(pokedexPokemon.name, "https://pokeapi.com/api/v1/pokemon/"+pokedexPokemon.id+"/");
+        pokemon.setDetails(pokedexPokemon);
+
+        this.pokemons.push(pokemon);
+      } else {
+        console.log("Get pokemon from service");
+        this.service.getPokemonById(id)
+          .subscribe(res => {
+            let pokemon = new Pokemon(res.name, "https://pokeapi.com/api/v1/pokemon/"+res.id+"/");
+            pokemon.setDetails(res);
+
+            this.pokemons.push(pokemon);
+            this.pokedex.addPokemonToPokedex(pokemon);
+          }, error => {
+            console.log(error);
+            if (error.status !== 404) {
+              capturedPkm.push(id);
+            }
+          });
+      }
     }
   }
 

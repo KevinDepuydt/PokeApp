@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PokemonService} from "../pokemon.service";
 import {Pokemon} from "../pokemon";
 import {Router} from "@angular/router";
+import {PokedexService} from "../pokedex.service";
 
 @Component({
   selector: 'app-pokemon-list',
@@ -13,7 +14,7 @@ export class PokemonListComponent implements OnInit {
   public pokemons: Pokemon[];
   public safariProgress: number;
 
-  constructor(private service: PokemonService, private router: Router) {
+  constructor(private service: PokemonService, private pokedex: PokedexService, private router: Router) {
     this.safariProgress = 0;
     this.pokemons = [];
   }
@@ -26,19 +27,33 @@ export class PokemonListComponent implements OnInit {
 
     while (pokemonIds.length > 0) {
       let id = pokemonIds.pop();
-      this.service.getPokemonById(id)
-        .subscribe(res => {
-          let pokemon = new Pokemon(res.name, "https://pokeapi.com/api/v1/pokemon/"+res.id+"/");
-          pokemon.setDetails(res);
+      let pokedexPokemon = this.pokedex.getPokemonFromPokedex(id);
 
-          this.pokemons.push(pokemon);
-          this.safariProgress = (this.pokemons.length * 100) / this.pokemonToLoad;
-        }, error => {
-          console.log(error);
-          if (error.status !== 404) {
-            pokemonIds.push(id);
-          }
-        });
+      if (pokedexPokemon) {
+        console.log("Get pokemon from local storage");
+        let pokemon = new Pokemon(pokedexPokemon.name, "https://pokeapi.com/api/v1/pokemon/"+pokedexPokemon.id+"/");
+        pokemon.setDetails(pokedexPokemon);
+
+        this.pokemons.push(pokemon);
+        this.safariProgress = (this.pokemons.length * 100) / this.pokemonToLoad;
+      } else {
+        console.log("Get pokemon from service");
+        this.service.getPokemonById(id)
+          .subscribe(res => {
+            let pokemon = new Pokemon(res.name, "https://pokeapi.com/api/v1/pokemon/"+res.id+"/");
+            pokemon.setDetails(res);
+
+            this.pokedex.addPokemonToPokedex(pokemon);
+
+            this.pokemons.push(pokemon);
+            this.safariProgress = (this.pokemons.length * 100) / this.pokemonToLoad;
+          }, error => {
+            console.log(error);
+            if (error.status !== 404) {
+              pokemonIds.push(id);
+            }
+          });
+      }
     }
   }
 
