@@ -1,0 +1,99 @@
+.site-title {
+  margin: 0 0 0 25px;
+  font-size: 28px;
+  position: relative;
+  bottom: 3px;
+}
+
+.app-content {
+  padding: 20px;
+}
+
+.app-content md-card {
+  margin: 20px;
+}
+
+.app-sidenav {
+  padding: 10px;
+  min-width: 150px;
+}
+
+.app-sidenav button {
+  width: 100%;
+}
+
+.app-sidenav-layout {
+  height: 100vh;
+}
+
+.app-content md-checkbox {
+  margin: 10px;
+}
+
+.app-toolbar-filler {
+  flex: 1 1 auto;
+}
+
+.app-toolbar-menu {
+  padding: 0 14px 0 14px;
+  color: white;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  border-radius: 2px;
+  text-decoration: none;
+  height: 50px;
+  width: 50px;
+  transition: background 0.2s ease-out;
+}
+
+.app-icon-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.app-icon-button:focus {
+  outline: 0;
+}
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.app-spinner {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+}
+
+.app-input-icon {
+  font-size: 16px;
+}
+
+.app-list {
+  border: 1px solid rgba(0,0,0,0.12);
+  width: 350px;
+  margin: 20px;
+}
+
+.sidenav-item {
+  margin-bottom: 10px;
+}
+
+.md-toolbar-layout {
+  padding: 5px 0;
+}

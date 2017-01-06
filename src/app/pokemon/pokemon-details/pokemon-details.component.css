@@ -1,0 +1,20 @@
+.pokemon-details {
+  width: 100%;
+  font-size: 16px;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-collapse: collapse;
+}
+
+.pokemon-details td {
+  padding: 10px;
+}
+
+.pokemon-details tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.pokemon-details tr td:first-child {
+  width: 200px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.03);
+}

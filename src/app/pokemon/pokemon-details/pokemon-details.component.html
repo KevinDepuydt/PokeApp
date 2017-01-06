@@ -1,0 +1,48 @@
+<md-card class="pokemon-card">
+  <md-card-header>
+    <img md-card-avatar (error)="pokemon.image = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png'" [src]="pokemon.image">
+    <md-card-title>#{{pokemon.id}} - {{pokemon.name | uppercase}}</md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <table class="pokemon-details">
+      <tbody>
+        <tr>
+          <td>Height</td>
+          <td>{{ pokemon.height }}</td>
+        </tr>
+        <tr>
+          <td>Weight</td>
+          <td>{{ pokemon.weight }}</td>
+        </tr>
+        <tr>
+          <td>Types</td>
+          <td><span *ngFor="let typeItem of pokemon.types;">{{ typeItem.type.name }}, </span></td>
+        </tr>
+        <tr>
+          <td>Abilities</td>
+          <td><span *ngFor="let abilityItem of pokemon.abilities;">{{ abilityItem.ability.name }}, </span></td>
+        </tr>
+        <tr>
+          <td>Base experience</td>
+          <td>{{ pokemon.base_experience }}</td>
+        </tr>
+        <tr>
+          <td>Is default</td>
+          <td>{{ pokemon.is_default }}</td>
+        </tr>
+        <tr *ngFor="let statItem of pokemon.stats;">
+          <td>Base {{ statItem.stat.name }}</td>
+          <td>{{ statItem.base_stat }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+  <md-card-actions>
+    <button md-icon-button md-fab md-tooltip="Capturer" color="accent" [hidden]="pokemon.isCaptured()" (click)="pokemon.capture()">
+      <md-icon class="md-24">add</md-icon>
+    </button>
+    <button md-icon-button md-fab md-tooltip="Relacher" color="accent" [hidden]="!pokemon.isCaptured()" (click)="pokemon.release()">
+      <md-icon class="md-24">clear</md-icon>
+    </button>
+  </md-card-actions>
+</md-card>

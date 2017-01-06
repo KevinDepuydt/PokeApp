@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  margin: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.pokemon-list {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.pokemon-list .pokemon-card {
+  width: calc(50% - 58px);
+  margin: 15px 0;
+}
+
+.pokemon-list .pokemon-card:nth-child(odd) {
+  margin-right: 10px;
+}
+
+.pokemon-list .pokemon-card:nth-child(even) {
+  margin-left: 10px;
+}
+
+.pokemon-card md-card-header {
+  height: 100px;
+}
+
+.pokemon-card md-card-header img {
+  width: auto;
+  height: auto;
+}
+
+.pokemon-card a {
+  color: #505050;
+  text-decoration: none;
+  transition: color 0.2s ease-out;
+}
+
+.pokemon-card a:hover {
+  color: #ff5252;
+  cursor: pointer;
+}
+
+.pokemon-card md-card-actions {
+  padding: 10px 25px 5px;
+  text-align: right;
+  margin-bottom: 0 !important;
+}

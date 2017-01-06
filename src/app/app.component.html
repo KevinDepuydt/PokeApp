@@ -1,0 +1,22 @@
+<md-sidenav-layout [class.t-dark]="isDarkTheme" class="app-sidenav-layout">
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+    <div class="sidenav-item">
+      <button md-raised-button routerLink="/" color="accent">Pokémons attrapés</button>
+    </div>
+    <div class="sidenav-item">
+      <button md-raised-button routerLink="/pokemon" color="accent">Faire un Safari</button>
+    </div>
+  </md-sidenav>
+
+  <md-toolbar color="primary">
+    <button class="app-icon-button" (click)="sidenav.toggle()">
+      <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+    <h1 class="site-title">{{name}}</h1>
+    <span class="app-toolbar-filler"></span>
+  </md-toolbar>
+
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-layout>

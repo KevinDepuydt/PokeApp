@@ -1,0 +1,34 @@
+<md-card [hidden]="safariProgress === 100">
+  <label>
+    Safari pokémon en cours ... {{ safariProgress }}%
+    <md-progress-bar
+      class="app-progress"
+      color="accent"
+      mode="determinate"
+      [value]="safariProgress"
+      aria-label="Determinate progress-bar example"></md-progress-bar>
+  </label>
+</md-card>
+
+<md-card [hidden]="safariProgress < 100">
+  <button md-raised-button color="accent" (click)="getRandomPokemons()">
+    Faire un nouveau Safari
+  </button>
+</md-card>
+
+<div class="pokemon-list">
+  <md-card *ngFor="let pokemon of pokemons; let i = index;" [hidden]="safariProgress < 100" class="pokemon-card">
+    <md-card-header>
+      <img md-card-avatar (error)="pokemon.image = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png'" [src]="pokemon.image">
+      <md-card-title>#{{pokemon.id}}</md-card-title>
+      <md-card-subtitle>
+        <a [routerLink]="['/pokemon', pokemon.id]" routerLinkActive="active">{{pokemon.name | uppercase}}</a>
+      </md-card-subtitle>
+    </md-card-header>
+    <md-card-actions>
+      <button md-icon-button md-fab md-tooltip="Capturer" color="accent" [hidden]="pokemon.isCaptured()" (click)="pokemon.capture()">
+        <md-icon class="md-24">add</md-icon>
+      </button>
+    </md-card-actions>
+  </md-card>
+</div>

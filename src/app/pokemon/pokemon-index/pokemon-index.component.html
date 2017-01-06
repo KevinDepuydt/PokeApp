@@ -1,0 +1,13 @@
+<md-card>Vous avez attrapé {{ capturedPokemons }} pokémons</md-card>
+
+<div class="pokemon-list">
+  <md-card *ngFor="let pokemon of pokemons; let i = index;" [hidden]="safariProgress < 100" class="pokemon-card">
+    <md-card-header>
+      <img md-card-avatar (error)="pokemon.image = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png'" [src]="pokemon.image">
+      <md-card-title>#{{pokemon.id}}</md-card-title>
+      <md-card-subtitle>
+        <a [routerLink]="['/pokemon', pokemon.id]" routerLinkActive="active">{{pokemon.name | uppercase}}</a>
+      </md-card-subtitle>
+    </md-card-header>
+  </md-card>
+</div>
