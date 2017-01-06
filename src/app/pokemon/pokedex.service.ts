@@ -12,5 +12,6 @@ export class PokedexService {
 
   addPokemonToPokedex(pokemon) {
     this.pokedex[pokemon.id] = pokemon;
+    localStorage.setItem("pokedex", JSON.stringify(this.pokedex));
   }
 }
